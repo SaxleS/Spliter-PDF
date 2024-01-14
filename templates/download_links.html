@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Download Split PDFs</title>
+    <link rel="stylesheet" type="text/css" href="../static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Download Files</h2>
+        <p>Total files: {{ files|length }}</p>
+        <button class="download-all" onclick="downloadAll()">Download All</button>
+        <div style="display: none;">
+            {% for file in files %}
+                <a class="download-link" href="{{ file }}" download></a>
+            {% endfor %}
+        </div>
+    </div>
+    <script>
+        function downloadAll() {
+            document.querySelectorAll('.download-link').forEach(link => link.click());
+        }
+    </script>
+</body>
+</html>
