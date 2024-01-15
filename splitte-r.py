@@ -76,4 +76,8 @@ def download_file(filename):
 if __name__ == '__main__':
     if not os.path.exists(SAVE_FOLDER):
         os.makedirs(SAVE_FOLDER)
-    app.run(debug=True)
+    
+    # Получить порт из переменной окружения PORT, или использовать 5000 по умолчанию
+    port = int(os.environ.get('PORT', 5000))
+    
+    app.run(host='0.0.0.0', port=port, debug=True)
