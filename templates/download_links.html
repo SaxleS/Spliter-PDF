@@ -3,21 +3,49 @@
 <head>
     <title>Download Split PDFs</title>
     <link rel="stylesheet" type="text/css" href="../static/style.css">
+    <link rel="stylesheet" type="text/css" href="../static/style.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4477684231447143"
+    crossorigin="anonymous"></script>
 </head>
 <body>
-    <div class="container">
-        <h2>Download Files</h2>
-        <p>Total files: {{ files|length }}</p>
-        <button class="download-all" onclick="downloadAll()">Download All</button>
-        <div style="display: none;">
-            {% for file in files %}
-                <a class="download-link" href="{{ file }}" download></a>
-            {% endfor %}
+    <header>
+        <div class="logo">
+            <h3>SPLITTER</h3>
         </div>
+    </header>
+    <main>
+        <div class="container">
+            <h2>Download Files</h2>
+            <p>Total files: {{ files|length }}</p>
+            <button class="download-all" onclick="downloadAll()">Download All</button>
+            <div style="display: none;">
+                {% for file in files %}
+                    <a class="download-link" href="{{ file }}" download></a>
+                {% endfor %}
+            
+
+            </div>
+            <button class="back" onclick="goBack()">Back</button>
+
+        </div>
+    </main>
+
+    <div class="adsbygoogle">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-4477684231447143"
+             data-ad-slot="Ваш_слот_ID"
+             data-ad-format="auto"></ins>
     </div>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
     <script>
         function downloadAll() {
             document.querySelectorAll('.download-link').forEach(link => link.click());
+        }
+        function goBack() {
+            window.history.back();
         }
     </script>
 </body>
