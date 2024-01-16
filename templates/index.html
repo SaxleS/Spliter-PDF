@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PDF Splitter</title>
+    <link rel="stylesheet" type="text/css" href="../static/style.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4477684231447143"
+    crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <h3>SPLITTE-R</h3>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <h2>Upload PDF File</h2>
+            <form action="/upload" method="post" enctype="multipart/form-data">
+                <label for="horizontalRange">Horizontal: <span id="horizontalValue">4</span></label>
+                <input id="horizontalRange" type="range" min="1" max="10" step="1" value="4">
+                <br>
+                <label for="verticalRange">Vertical: <span id="verticalValue">5</span></label>
+                <input id="verticalRange" type="range" min="1" max="10" step="1" value="5">
+                <br>
+                <input id="fileInput" type="file" name="file" accept="application/pdf">
+                <input id="submitButton" type="submit" value="Converting" accept="application/pdf" disabled>
+            </form>
+        </div>
+    </main>
+
+    <div class="adsbygoogle">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-4477684231447143"
+             data-ad-slot="Ваш_слот_ID"
+             data-ad-format="auto"></ins>
+    </div>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+
+
+
+    <script>
+document.addEventListener("DOMContentLoaded", function() {
+    var fileInput = document.getElementById('fileInput');
+    var submitButton = document.getElementById('submitButton');
+    var horizontalRange = document.getElementById('horizontalRange');
+    var verticalRange = document.getElementById('verticalRange');
+    var horizontalValue = document.getElementById('horizontalValue');
+    var verticalValue = document.getElementById('verticalValue');
+
+    // Функция для обновления отображаемого значения ползунка
+    function updateSliderDisplay(slider, display) {
+        display.textContent = slider.value;
+    }
+
+    // Обработчики событий для ползунков
+    horizontalRange.addEventListener('input', function() {
+        updateSliderDisplay(horizontalRange, horizontalValue);
+    });
+
+    verticalRange.addEventListener('input', function() {
+        updateSliderDisplay(verticalRange, verticalValue);
+    });
+
+    // Обновление значения при первой загрузке страницы
+    updateSliderDisplay(horizontalRange, horizontalValue);
+    updateSliderDisplay(verticalRange, verticalValue);
+
+    // Обработчик событий для кнопки отправки формы
+    fileInput.addEventListener('change', function() {
+        submitButton.disabled = !fileInput.files.length;
+    });
+
+    // Перехват и обработка события отправки формы
+    var form = document.querySelector('form');
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        var formData = new FormData();
+        formData.append('file', fileInput.files[0]);
+        formData.append('num_splits_horizontal', horizontalRange.value);
+        formData.append('num_splits_vertical', verticalRange.value);
+
+        fetch('/upload', {
+            method: 'POST',
+            body: formData
+        }).then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.text();
+        }).then(data => {
+            document.body.innerHTML = data; // Заменяем содержимое страницы ответом от сервера
+        }).catch(error => {
+            console.error('Ошибка:', error);
+        });
+    });
+});
+
+
+    </script>
+</body>
+</html>

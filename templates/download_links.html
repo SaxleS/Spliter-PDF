@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Download Split PDFs</title>
+    <link rel="stylesheet" type="text/css" href="../static/style.css">
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <h3>SPLITTE-R</h3>
+        </div>
+    </header>
+    <main>
+        <div class="container">
+            <h2>Download Files</h2>
+            <p>Total files: {{ files|length }}</p>
+            <form id="downloadForm" action="/download/all" method="GET">
+                <button class="download-all">Download All</button>
+            </form>
+            <div style="display: none;">
+                {% for file in files %}
+                    <a class="download-link" href="{{ file }}" download></a>
+                {% endfor %}
+            </div>
+        </div>
+    </main>
+    <script>
+        document.getElementById("downloadForm").addEventListener("submit", function() {
+            
+            document.querySelectorAll('.download-link').forEach(link => link.click());
+        });
+    </script>
+</body>
+</html>
