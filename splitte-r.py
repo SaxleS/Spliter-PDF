@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, send_from_directory
+from flask import Flask, request, render_template, send_from_directory, Response
 import fitz  # PyMuPDF
 import os
 import io
@@ -10,6 +10,22 @@ from flask import Response
 
 app = Flask(__name__)
 SAVE_FOLDER = 'static/downloads/'
+
+
+@app.route('/restricted')
+def restricted_page():
+    # Проверка прав доступа пользователя
+    if user_has_access():
+        return render_template('restricted_page.html')
+    else:
+        return "Доступ запрещен", 403  # 403 Forbidden
+
+def user_has_access():
+    # Здесь можно проверить права доступа пользователя
+    # и вернуть True или False в зависимости от результата
+    return True  # Имитация успешной проверки
+
+
 
 
 @app.route('/download/all', methods=['GET'])
