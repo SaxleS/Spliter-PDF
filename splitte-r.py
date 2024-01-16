@@ -112,16 +112,16 @@ def download_file(filename):
         return "Invalid file path", 400
     return send_from_directory(SAVE_FOLDER, filename, as_attachment=True)
 
-if __name__ == '__main__':
-    if not os.path.exists(SAVE_FOLDER):
-        os.makedirs(SAVE_FOLDER)
-    app.run(debug=True)
-
 # if __name__ == '__main__':
 #     if not os.path.exists(SAVE_FOLDER):
 #         os.makedirs(SAVE_FOLDER)
+#     app.run(debug=True)
+
+if __name__ == '__main__':
+    if not os.path.exists(SAVE_FOLDER):
+        os.makedirs(SAVE_FOLDER)
     
-#     # Получить порт из переменной окружения PORT, или использовать 5000 по умолчанию
-#     port = int(os.environ.get('PORT', 5000))
+    # Получить порт из переменной окружения PORT, или использовать 5000 по умолчанию
+    port = int(os.environ.get('PORT', 5000))
     
-#     app.run(host='0.0.0.0', port=port, debug=True)
+    app.run(host='0.0.0.0', port=port, debug=True)
